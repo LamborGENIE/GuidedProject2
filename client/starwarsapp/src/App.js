@@ -1,7 +1,9 @@
+import { Route, Routes, Navigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import './App.css';
-import Characters from './components/Characters';
+import Home from './components/Home'
+import Characters from './components/Characters'
 
 function App() {
 
@@ -19,13 +21,12 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h1>Star Wars Universe Lookup</h1>
-        <label for="searchString">Who you looking for? <span class="small">(Regular expressions are cool
-          here)</span></label>
-        <input id="searchString" oninput="filterCharacters()" autocomplete="off" />
-      </div>
-      <Characters characters={characters}/>
+      
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Home characters={characters}/>} />
+        <Route path="/characters" element={<Characters characters={characters}/>} />
+      </Routes>
     </div>
   );
 }
