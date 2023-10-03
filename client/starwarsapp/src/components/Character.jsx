@@ -3,7 +3,7 @@ export default (props) => {
 
     return (
         <div>
-            <s>{props.character.name}</s>
+            <p>{props.character.name}</p>
         </div>
     );
 }
