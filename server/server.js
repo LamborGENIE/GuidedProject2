@@ -35,6 +35,15 @@ app.get("/films", (req, res) => {
     data.then(films => res.send(films));
 });
 
+app.get("/films/:id", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_films.findOne({ "id": id })
+            .then(film => res.send(film));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
 app.get("/characters", (req, res) => {
     let data = collection_characters.find().toArray();
     data.then(characters => res.send(characters));
