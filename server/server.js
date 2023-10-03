@@ -45,14 +45,68 @@ app.get("/films/:id", async (req, res) => {
     catch (error) { res.status(500).send("Internal Server Error") }
 });
 
+app.get("/films/:id/characters", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_film_characters.find({ "film_id": id }).toArray()
+            .then(characters => res.send(characters));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
+app.get("/films/:id/planets", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_film_planets.find({ "film_id": id }).toArray()
+            .then(planets => res.send(planets));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
 app.get("/characters", (req, res) => {
     let data = collection_characters.find().toArray();
     data.then(characters => res.send(characters));
 });
 
+app.get("/characters/:id", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_characters.findOne({ "id": id })
+            .then(character => res.send(character));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
+app.get("/characters/:id/films", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_film_characters.find({ "character_id": id }).toArray()
+            .then(film => res.send(film));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
 app.get("/planets", (req, res) => {
     let data = collection_planets.find().toArray();
     data.then(planets => res.send(planets));
+});
+
+app.get("/planets/:id", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_planets.findOne({ "id": id })
+            .then(planet => res.send(planet));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
+});
+
+app.get("/planets/:id/films", async (req, res) => {
+    try {
+        let id = +req.params.id;
+        await collection_film_planets.find({ "planet_id": id }).toArray()
+            .then(film => res.send(film));
+    }
+    catch (error) { res.status(500).send("Internal Server Error") }
 });
 
 app.get("/film_characters", (req, res) => {
