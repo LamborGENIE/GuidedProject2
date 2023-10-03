@@ -1,9 +1,10 @@
 
-
+var cors = require('cors');
 const express = require('express');
 //const dao = require("./data_access");
 const app = express();
 app.use(express.json()); //Parse JSON body
+app.use(cors()); 
 
 
 const mongodb = require("mongodb"); // mongo client library  
